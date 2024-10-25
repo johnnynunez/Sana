@@ -320,6 +320,9 @@
             background-color: #fff;
             text-align: center;
         }
+        .demo iframe {
+            width: 50%;
+        }
         .image-comparison-content .image-2 {
             clip-path: inset(0 0 0 50%);
         }
@@ -332,12 +335,18 @@
                 grid-auto-columns: 100px; /* Adjust columns for smaller screens */
                 grid-auto-rows: 200px; /* Set a fixed height for the grid items */
             }
+            .demo iframe {
+                width: 800px;
+            }
         }
         @media (max-width: 2048px) {
             .gallery {
                 /*grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); !* Adjust columns for smaller screens *!*/
                 grid-auto-columns: 60px; /* Adjust columns for smaller screens */
                 grid-auto-rows: 90px; /* Set a fixed height for the grid items */
+            }
+            .demo iframe {
+                width: 800px;
             }
         }
         @media (min-width: 2048px) {
@@ -365,6 +374,9 @@
                 /*grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); !* Adjust columns for smaller screens *!*/
                 grid-auto-columns: 40px; /* Adjust columns for smaller screens */
                 grid-auto-rows: 70px; /* Set a fixed height for the grid items */
+            }
+            .demo iframe {
+                width: 80%;
             }
         }
         @media (min-width: 1024px) {
@@ -430,6 +442,9 @@
             .logo {
                 gap: 10px;
             }
+            .demo iframe {
+                width: 95%;
+            }
         }
         /* Dark mode */
         @media (prefers-color-scheme: dark) {
@@ -468,7 +483,7 @@
             }
             .demo {
                 background-color: #333;
-        }
+            }
         }
     </style>
 </head>
@@ -693,7 +708,7 @@
         </div>
 
         <div class="demo">
-            <iframe src="https://24b5795674fcf4e2b0.gradio.live/" width="50%" height="1280" style="border: 1px solid #ddd; border-radius: 4px;" allowfullscreen=""></iframe>
+            <iframe src="https://24b5795674fcf4e2b0.gradio.live/" height="1280" style="border: 1px solid #ddd; border-radius: 4px;" allowfullscreen=""></iframe>
         </div>
 
         <!--BibTex citation -->
