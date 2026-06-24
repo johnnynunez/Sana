@@ -1,16 +1,14 @@
 # Sol-Engine
 
-Sol-Engine is an efficiency-oriented inference codebase for high-resolution video diffusion. It wraps Cosmos3-Super, LTX-2.3, and SANA-Video with one explicit acceleration line per model.
+Sol-Engine is an efficiency-oriented inference framework for high-resolution video diffusion. It wraps Cosmos3-Super, LTX-2.3, and SANA-Video with one explicit acceleration line per model.
 
 ## Models and speedups
 
 | Model | Params | Acceleration line | Speedup |
-|---|---:|---|---:|
+|---|:---:|---|:---:|
 | [Cosmos3-Super (4xB200)](pipelines/cosmos3.md) | 64B | TeaCache + NVFP4 | ~2.26x |
 | [LTX-2.3 (1xB200)](pipelines/ltx.md) | 22B | KWL fusion + cache + PISA + NVFP4 + token-prune | ~2.4x |
 | [SANA-Video (1xB200)](pipelines/sana.md) | 2B | EasyCache + fusion + compile | 2.77x |
-
-GB200 timings, warmup excluded. Cosmos3 uses 1280x720, 189 frames, 35 steps; LTX uses 1088x1920, 241 frames; SANA uses 480p, 81 frames, 50 steps.
 
 ## The five acceleration methods
 
@@ -25,8 +23,8 @@ Video diffusion inference exposes redundancy at three complementary levels:
 | [Cache](techniques/cache.md) | TeaCache, EasyCache, fixed-step cache |
 | [Quantization](techniques/quant.md) | NVFP4 |
 | [Kernel fusion](techniques/kernel.md) | KWL fusion, QKV merge, compile |
-| [Sparse attention](techniques/sparse.md) | `sparse_attention.py`, `piecewise_attn.py`, `video_sparse_attn.py`, `sparse_video_gen_2_attn.py`, `sparse_linear_attn.py`, `block_sparse_attn.py` |
-| [Token pruning](techniques/token_prune.md) | `token_prune.py`, `ltx_2_denoising.py`, `ltx2_spec.py`, `spec.py` |
+| [Sparse attention](techniques/sparse.md) | PISA, SpargeAttention, Sparse VideoGen, ... |
+| [Token pruning](techniques/token_prune.md) | Feature-norm pruning, ToMe-SD, Astraea, ... |
 
 ## Quick start
 
