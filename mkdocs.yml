@@ -1,9 +1,9 @@
 site_name: Sol-Engine Documentation
 site_description: Agent-native full-stack acceleration for video-diffusion inference
 site_author: Sol-Engine Team
-site_url: https://nvlabs.github.io/Sol-Video-Inference-Engine/
-repo_name: NVlabs/Sol-Video-Inference-Engine
-repo_url: https://github.com/NVlabs/Sol-Video-Inference-Engine
+site_url: https://nvlabs.github.io/Sana/Sol-Engine/docs/
+repo_name: NVlabs/Sana:sol-engine
+repo_url: https://github.com/NVlabs/Sana/tree/sol-engine
 docs_dir: site_docs
 
 theme:
@@ -77,7 +77,7 @@ nav:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/NVlabs/Sol-Video-Inference-Engine
+      link: https://github.com/NVlabs/Sana/tree/sol-engine
   generator: false
 
 extra_css:
