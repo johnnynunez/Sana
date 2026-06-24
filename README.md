@@ -1,5 +1,5 @@
 <p align="center" style="border-radius: 10px">
-  <img src="assets/logo.png" width="45%" alt="Sol-Engine logo"/>
+  <img src="assets/sol-engine-logo.png" width="45%" alt="Sol-Engine logo"/>
 </p>
 
 <h3 align="center">
