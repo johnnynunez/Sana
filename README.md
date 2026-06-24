@@ -1,0 +1,152 @@
+<p align="center" style="border-radius: 10px">
+  <img src="https://raw.githubusercontent.com/NVlabs/Sol-Video-Inference-Engine/main/site_docs/assets/sol-engine-logo.png" width="45%" alt="Sol-Engine logo"/>
+</p>
+
+<h3 align="center">
+  Accelerated video-diffusion inference —
+  <a href="https://nvlabs.github.io/Sol-Video-Inference-Engine/pipelines/sana/">SANA-Video</a> ·
+  <a href="https://nvlabs.github.io/Sol-Video-Inference-Engine/pipelines/cosmos3/">Cosmos3-Super</a> ·
+  <a href="https://nvlabs.github.io/Sol-Video-Inference-Engine/pipelines/ltx/">LTX-2.3</a>
+</h3>
+
+<h3 align="center">
+  <a href="https://nvlabs.github.io/Sol-Video-Inference-Engine/">📖 Docs</a> &nbsp;|&nbsp;
+  <a href="https://nvlabs.github.io/Sol-Video-Inference-Engine/pipelines/sana/">Pipelines</a> &nbsp;|&nbsp;
+  <a href="https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/cache/">Techniques</a> &nbsp;|&nbsp;
+  <a href="https://nvlabs.github.io/Sol-Video-Inference-Engine/installation/">Install</a>
+</h3>
+
+<p align="center">
+  <a href="https://nvlabs.github.io/Sol-Video-Inference-Engine/"><img src="https://img.shields.io/badge/🏠_Homepage-Sol--Engine-76b900?style=flat-square" alt="Homepage"/></a>
+  <a href="https://arxiv.org/abs/2606.23743"><img src="https://img.shields.io/badge/📄_arXiv-2606.23743-b31b1b?style=flat-square" alt="arXiv"/></a>
+  <a href="https://nvlabs.github.io/Sol-Video-Inference-Engine/"><img src="https://img.shields.io/badge/📖_Docs-github.io-blue?style=flat-square" alt="Docs"/></a>
+  <a href="#-license"><img src="https://img.shields.io/badge/License-Apache_2.0-green?style=flat-square" alt="License"/></a>
+</p>
+
+<h4 align="center">
+  Agent-native workflow · Full-stack acceleration techniques · A wide range of video generation models
+</h4>
+
+---
+
+**Sol-Engine** is an efficiency-oriented inference codebase for high-resolution video
+diffusion, built on [SGLang](https://github.com/sgl-project/sglang)'s `multimodal_gen`
+runtime. It features an **agent-native inference workflow** and reduces three production
+models into **one unambiguous acceleration line**. This is powered by a full-stack
+solution composed of **five reusable acceleration techniques**, delivering a **2× to 3×
+end-to-end speedup** across the three models. We are actively continuing development to
+support a wider range of models.
+
+## 📰 News
+
+- **[2026/06]** 🔥 **SANA-Video** — EasyCache + kernel fusion + torch.compile → **~2.77×** end-to-end (29.4 s → 10.6 s).
+- **[2026/06]** 🔥 **Cosmos3-Super** — TeaCache + step-selective NVFP4 → **~2.26×** end-to-end (4×GB200).
+- **[2026/06]** 🔥 **LTX-2.3** — KWL fusion + cache + PISA + NVFP4 + token-prune → **~2.4×** end-to-end.
+- **[2026/06]** 📖 **Docs release** — full documentation site live: [3 pipeline designs + 5 acceleration techniques](https://nvlabs.github.io/Sol-Video-Inference-Engine/), each technique with per-method literature surveys and paper links.
+
+## ⚡ Models & speedups
+
+<div align="center">
+
+| Model | Params | Acceleration line | Speedup |
+|---|---|---|---|
+| **[SANA-Video](https://huggingface.co/Efficient-Large-Model/SANA-Video_2B_480p_diffusers)** | 2B | EasyCache + fusion + compile | **~2.77×** |
+| **[Cosmos3-Super](https://huggingface.co/nvidia/Cosmos3-Super)** | 64B | TeaCache + step-selective NVFP4 | **~2.26×** |
+| **[LTX-2.3](https://huggingface.co/Lightricks/LTX-2.3)** | 22B | KWL fusion + cache + PISA + NVFP4 + token-prune | **~2.4×** |
+
+</div>
+
+<sub>GB200, warmup-excluded. SANA 480p (832×480, 81f, 50 steps); Cosmos3 1280×720, 189f, 35 steps; LTX 1088×1920, 241f.</sub>
+
+## 🧩 The five acceleration methods
+
+Video diffusion inference exposes redundancy at three complementary levels. At
+the **algorithm level**, adjacent denoising steps run structurally similar
+computations over slowly changing latents, so cache can reuse or skip step
+outputs. At the **model level**, long spatiotemporal sequences contain redundant
+tokens and attention interactions, motivating sparse attention and token
+pruning. At the **kernel level**, DiT blocks repeatedly launch memory-bound work
+around GEMMs, layout movement, normalization, activation, and precision
+conversion, which quantization and fusion reduce. Sol-Engine composes the five
+methods across these levels.
+
+<div align="center">
+
+| # | Method | What it does |
+|---|---|---|
+| 1 | **[Cache](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/cache/)** | reuse a denoise step's output (TeaCache / EasyCache / fix-step) |
+| 2 | **[Quantization](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/quant/)** | TransformerEngine NVFP4 4-bit, step-selective |
+| 3 | **[Kernel fusion](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/kernel/)** | fuse the memory-bound DiT glue (AdaLN, QK-norm+RoPE, gates, FFN) |
+| 4 | **[Sparse attention](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/sparse/)** | piecewise block-sparse video self-attention |
+| 5 | **[Token pruning](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/token_prune/)** | drop low-salience video tokens at mid refine steps |
+
+</div>
+
+## 🚀 Quick start (agent-native)
+
+Sol-Engine is installed and launched the **agent-native** way. Rather than hand-running
+the setup steps, you hand a coding agent — OpenAI **Codex** or **Claude Code** — a single
+goal and let it create the environment, fetch the weights, and run all three models in
+both `baseline` and `fullopt` settings, **troubleshooting and adapting the scripts to
+your machine** as it goes.
+
+From the repo root, give the agent this goal:
+
+```text
+/goal Execute the inference code for the three models using both baseline and full-opt
+settings with the following requirements. Refer to AGENTS.md for the environment creation,
+model download, and inference guides. For the environment, you need to create a new
+environment. For model weights, you are allowed to reuse existing weights if they are
+locally available; otherwise, you need to download them. Regarding adaptability, be aware
+that the provided guides for environment creation, download scripts, and inference may
+contain system incompatibilities, so you are expected to troubleshoot and adapt them to
+your specific machine.
+```
+
+## 📖 Getting started
+
+- 📚 **[Full documentation](https://nvlabs.github.io/Sol-Video-Inference-Engine/)** — a comprehensive guidebook to the whole project: pipeline designs, acceleration techniques, setup, and model references in one place
+- 🛠️ **[Installation](https://nvlabs.github.io/Sol-Video-Inference-Engine/installation/)** — conda env, editable install, CUDA-JIT fixups, and the HF model repos + download helpers
+- 🎬 **Optimized pipelines** — [SANA-Video](https://nvlabs.github.io/Sol-Video-Inference-Engine/pipelines/sana/) · [Cosmos3-Super](https://nvlabs.github.io/Sol-Video-Inference-Engine/pipelines/cosmos3/) · [LTX-2.3](https://nvlabs.github.io/Sol-Video-Inference-Engine/pipelines/ltx/)
+- ⚙️ **Acceleration techniques** — [Cache](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/cache/) · [Quantization](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/quant/) · [Kernel fusion](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/kernel/) · [Sparse attention](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/sparse/) · [Token pruning](https://nvlabs.github.io/Sol-Video-Inference-Engine/techniques/token_prune/)
+
+## ✅ To-do
+
+- [x] **SANA-Video** acceleration line — EasyCache + fusion + compile
+- [x] **Cosmos3-Super** acceleration line — TeaCache + step-selective NVFP4
+- [x] **LTX-2.3** acceleration line — KWL fusion + cache + PISA + NVFP4 + token-prune
+- [ ] More backends for each acceleration method
+- [ ] Agent-native workflow without human-in-the-loop
+
+## 🙏 Acknowledgements
+
+Built on [SGLang](https://github.com/sgl-project/sglang) and
+[🤗 Diffusers](https://github.com/huggingface/diffusers). Pipelines wrap
+[SANA-Video](https://github.com/NVlabs/Sana), NVIDIA
+[Cosmos](https://github.com/NVIDIA/Cosmos), and
+[Lightricks LTX-Video](https://github.com/Lightricks/LTX-Video). Acceleration methods
+draw on TeaCache, EasyCache, SVDQuant/Nunchaku, FlashAttention,
+[TransformerEngine](https://github.com/NVIDIA/TransformerEngine), and the sparse-attention
+/ token-reduction literature surveyed in the [docs](https://nvlabs.github.io/Sol-Video-Inference-Engine/).
+
+## 📌 Citation
+
+```bibtex
+@misc{li2026solvideoinferenceengine,
+  title         = {Sol Video Inference Engine: Agent-Native Full-Stack Acceleration Framework for Efficient Video Generation},
+  author        = {Yitong Li and Junsong Chen and Haopeng Li and Haozhe Liu and Jincheng Yu and Ligeng Zhu and Ping Luo and Song Han and Enze Xie},
+  year          = {2026},
+  eprint        = {2606.23743},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  doi           = {10.48550/arXiv.2606.23743},
+  url           = {https://arxiv.org/abs/2606.23743},
+}
+```
+
+## 📄 License
+
+Code in this repository is released under the Apache-2.0 license. The paper is
+available on arXiv under the arXiv.org perpetual, non-exclusive distribution
+license. Model weights follow their respective upstream licenses (SANA-Video,
+NVIDIA Cosmos, Lightricks LTX) — see each model card.
