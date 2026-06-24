@@ -4,9 +4,8 @@ EasyCache is the cache policy selected for SANA-Video. It is a runtime-adaptive 
 
 ## Sol-Engine placement
 
-| Pipeline | Scope | Configuration |
-|---|---|---|
-| SANA-Video | denoising transformer path | `--easycache 0.1` in the full optimization stack |
+Sol-Engine uses EasyCache in the SANA-Video denoising transformer path with
+`--easycache 0.1` in the full optimization stack.
 
 SANA-Video already uses an efficient linear-attention architecture, so EasyCache becomes the main algorithm-level acceleration component before kernel-level optimization is applied.
 

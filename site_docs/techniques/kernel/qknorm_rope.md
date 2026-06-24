@@ -1,6 +1,8 @@
 # QK-norm + RoPE fusion
 
-QK-norm + RoPE fusion combines normalization and rotary-position work on the attention Q/K path. This targets repeated small operators that otherwise launch separately and move intermediate tensors through memory.
+QK-norm + RoPE fusion combines Q/K normalization and rotary-position work on the
+attention Q/K path. This targets repeated small operators that otherwise launch
+separately and move intermediate tensors through memory.
 
 ## Role in Sol-Engine
 

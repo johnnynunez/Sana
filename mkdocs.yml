@@ -83,9 +83,11 @@ nav:
           - ModelOpt / FP8: techniques/quant/modelopt_fp8.md
       - Kernel fusion:
           - Overview: techniques/kernel.md
-          - KWL fusion: techniques/kernel/kwl.md
+          - AdaLN and residual gate fusion: techniques/kernel/adaln_residual_gate.md
           - GEMM epilogues: techniques/kernel/gemm_epilogues.md
           - QK-norm + RoPE fusion: techniques/kernel/qknorm_rope.md
+          - Attention output gate fusion: techniques/kernel/attention_output_gate.md
+          - Residual and modulation glue fusion: techniques/kernel/residual_modulation.md
           - QKV merge: techniques/kernel/qkv_merge.md
           - torch.compile: techniques/kernel/torch_compile.md
       - Sparse attention:

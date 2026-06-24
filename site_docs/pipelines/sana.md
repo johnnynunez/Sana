@@ -4,10 +4,7 @@ SANA-Video is the 2B text-to-video path in Sol-Engine. The optimized configurati
 
 ## Speed
 
-| Setting | Acceleration line | Speedup |
-|---|---|---:|
-| Full optimization | EasyCache + fusion + compile | 2.77x |
-
+Full optimization uses EasyCache + fusion + compile and reaches 2.77x speedup.
 Measured on GB200 with 832x480, 81 frames, and 50 denoising steps, warmup excluded.
 
 ## Launch

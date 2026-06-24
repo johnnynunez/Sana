@@ -1,7 +1,5 @@
 # Installation
 
-This page mirrors the agent-ready setup path used by the repository.
-
 ## Prerequisites
 
 - NVIDIA GPU and driver support for CUDA 13.

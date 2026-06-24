@@ -4,9 +4,8 @@ Fixed-step cache uses a deterministic fixed-step schedule rather than a learned 
 
 ## Sol-Engine placement
 
-| Pipeline | Scope | Role |
-|---|---|---|
-| LTX-2.3 | stage-specific denoising path | selected cache component in the full optimization stack |
+Sol-Engine uses fixed-step cache in the LTX-2.3 stage-specific denoising path
+as the selected cache component in the full optimization stack.
 
 ## Why it is useful
 

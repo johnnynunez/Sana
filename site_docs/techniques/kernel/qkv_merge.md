@@ -4,9 +4,8 @@ QKV merge combines separate query, key, and value projection work where the mode
 
 ## Sol-Engine placement
 
-| Pipeline | Scope | Role |
-|---|---|---|
-| SANA-Video | attention projection path | combines with EasyCache, BF16 linear-attention kernels, and compile |
+Sol-Engine uses QKV merge in the SANA-Video attention projection path together
+with EasyCache, BF16 linear-attention kernels, and compile.
 
 ## Why it helps
 

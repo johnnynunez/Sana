@@ -6,7 +6,7 @@ The paper treats token pruning as a sequence-reduction family: the token-pruning
 
 ## In Sol-Engine
 
-LTX-2.3 uses token pruning in the full optimization stack together with KWL fusion, cache, PISA sparse attention, and NVFP4.
+LTX-2.3 uses token pruning in the full optimization stack together with kernel fusion, cache, PISA sparse attention, and NVFP4.
 
 Implemented entries:
 

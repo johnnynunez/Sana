@@ -4,9 +4,8 @@ Feature-norm pruning is the Sol-Engine token-pruning implementation used for LTX
 
 ## Sol-Engine placement
 
-| Pipeline | Scope | Default role |
-|---|---|---|
-| LTX-2.3 | stage-2 midpoint steps | combines with PISA, KWL fusion, cache, and NVFP4 |
+Sol-Engine uses feature-norm pruning in LTX-2.3 stage-2 midpoint steps together
+with PISA, kernel fusion, cache, and NVFP4.
 
 ## Tunable knobs
 

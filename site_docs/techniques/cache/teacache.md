@@ -4,9 +4,8 @@ TeaCache is the cross-step cache policy selected for Cosmos3-Super. It estimates
 
 ## Sol-Engine placement
 
-| Pipeline | Scope | Configuration |
-|---|---|---|
-| Cosmos3-Super | generation-path transformer blocks | threshold 1.15, start step 10, max 3 continuous hits |
+Sol-Engine uses TeaCache in the Cosmos3-Super generation-path transformer
+blocks with threshold 1.15, start step 10, and max 3 continuous hits.
 
 The first cache hit skips repeated generation-path transformer work and replays the cached residual. A recompute refreshes the residual when the accumulated change crosses the threshold or the max-hit cap is reached.
 

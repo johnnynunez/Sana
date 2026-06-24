@@ -6,6 +6,7 @@ GEMM epilogue fusion executes memory-bound follow-up work while intermediate GEM
 
 - GEMM + bias.
 - GEMM + GELU.
+- FFN projection plus activation.
 - GEMM + residual update.
 - GEMM + normalization-related epilogue work.
 

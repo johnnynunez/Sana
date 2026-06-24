@@ -4,9 +4,8 @@ PISA is the sparse attention method selected for LTX-2.3. It uses piecewise spar
 
 ## Sol-Engine placement
 
-| Pipeline | Scope | Configuration role |
-|---|---|---|
-| LTX-2.3 | selected stage-2 video self-attention | combines with cache, token pruning, NVFP4, and KWL fusion |
+Sol-Engine uses PISA in selected LTX-2.3 stage-2 video self-attention blocks
+together with cache, token pruning, NVFP4, and kernel fusion.
 
 ## Tunable knobs
 

@@ -4,10 +4,7 @@ Cosmos3-Super is the 64B multi-GPU pipeline. The optimized configuration combine
 
 ## Speed
 
-| Setting | Acceleration line | Speedup |
-|---|---|---:|
-| Conservative full optimization | TeaCache + NVFP4 | ~2.26x |
-
+Conservative full optimization uses TeaCache + NVFP4 and reaches ~2.26x speedup.
 Measured on 4x GB200 with 1280x720, 189 frames, and 35 denoising steps, warmup excluded.
 
 ## Launch
