@@ -2,6 +2,8 @@
 
 Cache methods exploit algorithm-level redundancy across adjacent diffusion denoising steps. The latent state changes gradually, so selected intermediate work can be reused when a step is sufficiently similar to a prior step.
 
+The paper frames cache as a cross-step family: the cache agent searches the policy, skip-step schedule, cached state, compensation rule, warmup, and maximum cached-step constraints for each deployment instance.
+
 ## In Sol-Engine
 
 | Pipeline | Cache path | Role |
@@ -9,6 +11,16 @@ Cache methods exploit algorithm-level redundancy across adjacent diffusion denoi
 | Cosmos3-Super | TeaCache | Residual replay across denoising steps |
 | LTX-2.3 | Stage-specific cache | Part of the full LTX optimization stack |
 | SANA-Video | EasyCache | Main SANA acceleration component |
+
+## Methods
+
+| Method | Role in the design space |
+|---|---|
+| [TeaCache](cache/teacache.md) | timestep-conditioned residual replay, selected for Cosmos3-Super |
+| [EasyCache](cache/easycache.md) | runtime-adaptive feature reuse, selected for SANA-Video |
+| [TaylorSeer](cache/taylorseer.md) | feature forecasting with Taylor-series extrapolation |
+| [Fixed-step cache](cache/fixed_step.md) | deterministic fixed-step schedule, selected for LTX-2.3 |
+| [Cache-DiT / DBCache](cache/cache_dit.md) | block-level diffusion cache family used as a related cache baseline |
 
 ## Practical notes
 

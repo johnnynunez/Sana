@@ -29,7 +29,6 @@ theme:
     - navigation.instant
     - navigation.tracking
     - navigation.sections
-    - navigation.expand
     - navigation.top
     - navigation.indexes
     - search.suggest
@@ -68,11 +67,41 @@ nav:
       - LTX-2.3: pipelines/ltx.md
       - SANA-Video: pipelines/sana.md
   - Techniques:
-      - Cache: techniques/cache.md
-      - Quantization: techniques/quant.md
-      - Kernel fusion: techniques/kernel.md
-      - Sparse attention: techniques/sparse.md
-      - Token pruning: techniques/token_prune.md
+      - Cache:
+          - Overview: techniques/cache.md
+          - TeaCache: techniques/cache/teacache.md
+          - EasyCache: techniques/cache/easycache.md
+          - TaylorSeer: techniques/cache/taylorseer.md
+          - Fixed-step cache: techniques/cache/fixed_step.md
+          - Cache-DiT / DBCache: techniques/cache/cache_dit.md
+      - Quantization:
+          - Overview: techniques/quant.md
+          - NVFP4: techniques/quant/nvfp4.md
+          - Diffusion PTQ: techniques/quant/diffusion_ptq.md
+          - SVDQuant / Nunchaku: techniques/quant/svdquant.md
+          - SageAttention: techniques/quant/sageattention.md
+          - ModelOpt / FP8: techniques/quant/modelopt_fp8.md
+      - Kernel fusion:
+          - Overview: techniques/kernel.md
+          - KWL fusion: techniques/kernel/kwl.md
+          - GEMM epilogues: techniques/kernel/gemm_epilogues.md
+          - QK-norm + RoPE fusion: techniques/kernel/qknorm_rope.md
+          - QKV merge: techniques/kernel/qkv_merge.md
+          - torch.compile: techniques/kernel/torch_compile.md
+      - Sparse attention:
+          - Overview: techniques/sparse.md
+          - PISA: techniques/sparse/pisa.md
+          - SpargeAttention: techniques/sparse/spargeattention.md
+          - Sparse VideoGen: techniques/sparse/sparse_videogen.md
+          - Sparse VideoGen2: techniques/sparse/sparse_videogen2.md
+          - VSA: techniques/sparse/vsa.md
+      - Token pruning:
+          - Overview: techniques/token_prune.md
+          - Feature-norm pruning: techniques/token_prune/feature_norm.md
+          - ToMe-SD: techniques/token_prune/tome_sd.md
+          - Astraea: techniques/token_prune/astraea.md
+          - TAPE: techniques/token_prune/tape.md
+          - CoReDiT: techniques/token_prune/coredit.md
 
 extra:
   social:
