@@ -14,36 +14,13 @@ Sol-Engine is an efficiency-oriented inference framework for high-resolution vid
 
 Video diffusion inference exposes redundancy at three complementary levels: **Algorithm level**: adjacent denoising steps run structurally similar computation over slowly changing latents. **Model level**: long spatiotemporal sequences contain redundant tokens and attention interactions. **Kernel level**: DiT blocks repeatedly launch memory-bound work around GEMMs, layout movement, normalization, activation, and precision conversion.
 
-<table class="sol-methods-table">
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Implemented entries</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="techniques/cache/">Cache</a></td>
-      <td>TeaCache, EasyCache, fixed-step cache</td>
-    </tr>
-    <tr>
-      <td><a href="techniques/quant/">Quantization</a></td>
-      <td>NVFP4</td>
-    </tr>
-    <tr>
-      <td><a href="techniques/kernel/">Kernel fusion</a></td>
-      <td>KWL fusion, QKV merge, compile</td>
-    </tr>
-    <tr>
-      <td><a href="techniques/sparse/">Sparse attention</a></td>
-      <td>PISA, SpargeAttention, Sparse VideoGen, ...</td>
-    </tr>
-    <tr>
-      <td><a href="techniques/token_prune/">Token pruning</a></td>
-      <td>Feature-norm pruning, ToMe-SD, Astraea, ...</td>
-    </tr>
-  </tbody>
-</table>
+| Method | Implemented entries |
+|---|---|
+| [Cache](techniques/cache.md) | TeaCache, EasyCache, fixed-step cache |
+| [Quantization](techniques/quant.md) | NVFP4 |
+| [Kernel fusion](techniques/kernel.md) | KWL fusion, QKV merge, compile |
+| [Sparse attention](techniques/sparse.md) | PISA, SpargeAttention, Sparse VideoGen, ... |
+| [Token pruning](techniques/token_prune.md) | Feature-norm pruning, ToMe-SD, Astraea, ... |
 
 ## Quick start
 

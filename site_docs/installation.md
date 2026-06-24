@@ -11,16 +11,22 @@ This page mirrors the agent-ready setup path used by the repository.
 ## Environment
 
 ```bash
-git clone --branch sol-engine https://github.com/NVlabs/Sana.git Sol-Engine
-cd Sol-Engine
+git clone https://github.com/NVlabs/Sol-Video-Inference-Engine.git Sol-Video-Inference-Engine
+cd Sol-Video-Inference-Engine
 
 PYTHON_VERSION=3.12 bash scripts/create_code_conda_env.sh
+source "$PWD/scripts/use_code_storage_env.sh"
 conda activate "$PWD/.conda/ltx23"
 
 uv pip install -e "$PWD/python[diffusion]" --prerelease=allow
 
 PYTHON_BIN=.conda/ltx23/bin/python bash scripts/postinstall_cuda_jit.sh
 ```
+
+`scripts/create_code_conda_env.sh` creates `.conda/ltx23` by default, installs
+`pip` and `uv`, and installs conda activation hooks for `scripts/use_code_storage_env.sh`.
+The script defaults to Python 3.11 when `PYTHON_VERSION` is unset; the agent guide
+sets `PYTHON_VERSION=3.12` for this stack.
 
 Add `--with-te` to `scripts/postinstall_cuda_jit.sh` when using the NVFP4 path for Cosmos3-Super or LTX-2.3.
 
