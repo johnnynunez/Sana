@@ -16,3 +16,9 @@ TaylorSeer is part of the cache design space considered by the cache agent. It i
 ## When to use
 
 Use TaylorSeer-style forecasting when the deployment needs more aggressive cross-step reuse than TeaCache or EasyCache can safely provide. Validate especially on motion consistency and high-frequency detail.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [TaylorSeer](https://github.com/Shenyi-Z/TaylorSeer)
+- [Cache-DiT](https://github.com/vipshop/cache-dit)

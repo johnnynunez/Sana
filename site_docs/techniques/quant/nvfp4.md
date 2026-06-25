@@ -23,3 +23,9 @@ NVFP4 requires Blackwell-class hardware and TransformerEngine support. On unsupp
 ## Validation
 
 Boundary steps are kept dense because early steps affect global structure and late steps refine high-frequency detail. Any change to the dense boundary should be validated visually.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [NVIDIA Transformer Engine](https://github.com/NVIDIA/TransformerEngine)
+- [NVIDIA Model Optimizer](https://github.com/NVIDIA/Model-Optimizer)

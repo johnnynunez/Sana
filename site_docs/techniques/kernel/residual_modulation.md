@@ -13,3 +13,8 @@ shape-specific and enabled only when profiling shows a real latency reduction.
 
 Confirm that residual accumulation order, dtype conversion, and modulation values
 match the unfused path within the expected precision envelope.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Sol-Engine code](https://github.com/NVlabs/Sana/tree/sol-engine)

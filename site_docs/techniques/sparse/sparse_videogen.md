@@ -16,3 +16,8 @@ It is part of the sparse-attention method family considered by the sparse-attent
 ## Validation
 
 Validate at the exact video duration and resolution. Sparse patterns can be configuration-specific.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Sparse VideoGen](https://github.com/svg-project/Sparse-VideoGen)

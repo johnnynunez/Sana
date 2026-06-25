@@ -14,3 +14,8 @@ Projection paths often launch multiple similar kernels and materialize intermedi
 ## Validation
 
 Keep the merged path equivalent to the original projections and verify output consistency before combining with EasyCache.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Sol-Engine code](https://github.com/NVlabs/Sana/tree/sol-engine)

@@ -18,3 +18,8 @@ with PISA, kernel fusion, cache, and NVFP4.
 ## Validation
 
 Middle-step pruning should preserve temporal coherence and late-step detail. Do not accept it from latency alone.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Sol-Engine code](https://github.com/NVlabs/Sana/tree/sol-engine)

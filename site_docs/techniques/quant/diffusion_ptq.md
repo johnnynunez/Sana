@@ -20,3 +20,9 @@ These methods define the broader quantization search space. The reported Sol-Eng
 - activation and weight bitwidth.
 - timestep-dependent scaling.
 - ignored or fallback layers.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Q-Diffusion](https://github.com/Xiuyu-Li/q-diffusion)
+- [PTQ4DM](https://github.com/42Shawn/PTQ4DM)

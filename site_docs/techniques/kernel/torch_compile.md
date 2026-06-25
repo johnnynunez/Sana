@@ -18,3 +18,8 @@
 ## Validation
 
 Run at least one warmup before quoting latency and compare generated video outputs under the same prompt and seed.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [torch.compile documentation](https://pytorch.org/docs/stable/generated/torch.compile.html)

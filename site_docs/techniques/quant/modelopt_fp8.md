@@ -17,3 +17,8 @@ The reported full optimization stacks focus on selective NVFP4 for Cosmos3-Super
 ## Validation
 
 Quantized checkpoints should be validated in the same pipeline where they will be composed. A checkpoint that is acceptable alone may become unacceptable after cache or sparse attention is added.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [NVIDIA Model Optimizer](https://github.com/NVIDIA/Model-Optimizer)

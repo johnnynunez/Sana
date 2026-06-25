@@ -19,3 +19,8 @@ The first cache hit skips repeated generation-path transformer work and replays 
 ## Validation
 
 Compare full videos, not only scalar similarity. Cache methods can preserve layout while shifting fine detail, so visual validation remains the acceptance criterion.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [TeaCache](https://github.com/ali-vilab/TeaCache)

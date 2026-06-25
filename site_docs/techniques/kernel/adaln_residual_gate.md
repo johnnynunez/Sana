@@ -15,3 +15,8 @@ shows the AdaLN and gate sequence is a meaningful overhead at the deployment sha
 The fused path should preserve the original block math within the expected BF16
 rounding envelope. Compare outputs with the unfused path before combining it with
 cache, sparse attention, quantization, or token pruning.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Sol-Engine code](https://github.com/NVlabs/Sana/tree/sol-engine)

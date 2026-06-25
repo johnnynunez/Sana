@@ -17,3 +17,9 @@ These fusions are candidates after profiling shows that fragmented memory-bound 
 ## Validation
 
 Epilogue fusion must preserve numerics within the expected precision envelope and should be benchmarked at the actual deployment shape.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [NVIDIA CUTLASS](https://github.com/NVIDIA/cutlass)
+- [ByteTransformer](https://github.com/bytedance/ByteTransformer)

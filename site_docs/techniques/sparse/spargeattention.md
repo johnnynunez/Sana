@@ -16,3 +16,8 @@ SpargeAttention is part of the sparse-attention design space. It is a candidate 
 ## Validation
 
 Compare against dense attention at the target resolution and duration; sparsity that works at shorter context can fail at longer temporal length.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [SpargeAttention](https://github.com/thu-ml/SpargeAttn)

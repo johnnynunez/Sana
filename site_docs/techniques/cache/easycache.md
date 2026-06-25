@@ -18,3 +18,8 @@ SANA-Video already uses an efficient linear-attention architecture, so EasyCache
 ## Validation
 
 Use the same prompt, seed, scheduler, resolution, and frame count when comparing baseline and full optimization outputs.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [EasyCache](https://github.com/H-EmbodVis/EasyCache)

@@ -16,3 +16,8 @@ It is a candidate sparse backend when semantic grouping can make sparse executio
 ## Validation
 
 Inspect whether semantic grouping preserves object boundaries and motion continuity across frames.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Sparse VideoGen](https://github.com/svg-project/Sparse-VideoGen)

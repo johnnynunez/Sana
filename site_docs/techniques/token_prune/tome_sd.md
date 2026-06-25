@@ -16,3 +16,9 @@ ToMe-SD is part of the token-reduction design space. It is a candidate when merg
 ## Validation
 
 Token merging can blur fine detail. Inspect texture, object boundaries, and motion consistency.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [ToMe-SD](https://github.com/dbolya/tomesd)
+- [Diffusers ToMe optimization guide](https://huggingface.co/docs/diffusers/en/optimization/tome)

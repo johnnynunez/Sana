@@ -17,6 +17,7 @@ PY="${PYTHON_BIN:-python}"
 NVCC_VER="${NVCC_VER:-13.2.78}"          # nvcc/crt/nvvm — JIT "nvcc: not found"
 CCCL_VER="${CCCL_VER:-13.2.75}"           # cuda-cccl headers must match the nvcc minor series
 CUBLAS_VER="${CUBLAS_VER:-13.2.2.2}"      # TE needs cublasLtGroupedMatrixLayoutInit_internal
+TE_VER="${TE_VER:-2.16.0}"
 WITH_TE=0
 [[ "${1:-}" == "--with-te" ]] && WITH_TE=1
 
@@ -55,6 +56,20 @@ if [[ -d "$NV_DIR" ]]; then
       [[ -e "$libdir/$unver" ]] || ln -s "$base" "$libdir/$unver"
     done
   done
+
+  # Make CUDA wheel headers/libs visible to source builds. TransformerEngine's
+  # torch extension includes cudnn.h directly, which is not under CUDA_HOME.
+  CUDA_HOME="${CUDA_HOME:-$NV_DIR/cu13}"
+  CUDACXX="${CUDACXX:-$CUDA_HOME/bin/nvcc}"
+  export CUDA_HOME CUDACXX
+  export PATH="$CUDA_HOME/bin:$PATH"
+  include_paths="$(find "$NV_DIR" -maxdepth 3 -type d -name include | paste -sd: -)"
+  lib_paths="$(find "$NV_DIR" -maxdepth 3 -type d \( -name lib -o -name lib64 \) | paste -sd: -)"
+  export CPATH="${include_paths}:${CPATH:-}"
+  export C_INCLUDE_PATH="${include_paths}:${C_INCLUDE_PATH:-}"
+  export CPLUS_INCLUDE_PATH="${include_paths}:${CPLUS_INCLUDE_PATH:-}"
+  export LIBRARY_PATH="${lib_paths}:${LIBRARY_PATH:-}"
+  export LD_LIBRARY_PATH="${lib_paths}:${LD_LIBRARY_PATH:-}"
 else
   echo "[postinstall] WARN: nvidia/ site-packages dir not found; skipped symlink step"
 fi
@@ -62,8 +77,24 @@ fi
 # 5. transformer_engine (optional; NVFP4 fullopt). No aarch64 prebuilt wheel as of
 #    cu13 — may build from source (needs nvcc + cmake) or be copied from a known-good env.
 if [[ "$WITH_TE" == "1" ]]; then
-  echo "[postinstall] installing transformer_engine (source build may take a while)"
-  "$PY" -m pip install "transformer_engine[pytorch]" || \
+  if [[ -z "${TMPDIR:-}" || "$TMPDIR" == /tmp* ]]; then
+    export TMPDIR="$PWD/.tmp"
+    export TMP="$TMPDIR"
+    export TEMP="$TMPDIR"
+  fi
+  mkdir -p "$TMPDIR"
+
+  echo "[postinstall] installing transformer_engine $TE_VER (source build may take a while)"
+  "$PY" -m pip install --no-deps \
+    "nvidia-cublas==${CUBLAS_VER}" \
+    "transformer_engine==${TE_VER}" \
+    "transformer_engine_cu13==${TE_VER}" \
+    "nvdlfw-inspect==0.2.2" \
+    "onnx==1.22.0" \
+    "onnx_ir==0.2.1" \
+    "onnxscript==0.7.0" && \
+  "$PY" -m pip install --no-build-isolation --no-deps "transformer_engine_torch==${TE_VER}" && \
+  "$PY" -m pip install --no-deps "nvidia-cublas==${CUBLAS_VER}" || \
     echo "[postinstall] WARN: TE install failed — NVFP4 fullopt will gracefully fall back to BF16"
 fi
 

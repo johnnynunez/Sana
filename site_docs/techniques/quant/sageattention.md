@@ -13,3 +13,8 @@ SageAttention is a candidate for deployments where attention remains a major bot
 ## Validation
 
 Inspect both motion smoothness and temporal flicker. Attention quantization can preserve frame-level aesthetics while changing temporal consistency.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [SageAttention](https://github.com/thu-ml/SageAttention)

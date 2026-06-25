@@ -19,3 +19,8 @@ together with cache, token pruning, NVFP4, and kernel fusion.
 ## Validation
 
 Validate temporal coherence and fine detail. Sparse attention errors can be subtle in single frames but visible over motion.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Piecewise sparse attention](https://github.com/xie-lab-ml/piecewise-sparse-attention)

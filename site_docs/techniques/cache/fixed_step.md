@@ -21,3 +21,8 @@ The LTX-2.3 pipeline has two stages and only a few high-resolution refinement st
 ## Validation
 
 Inspect stage-specific artifacts as well as final output. A schedule that helps stage 1 can still be unacceptable if it destabilizes stage 2 refinement.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Sol-Engine code](https://github.com/NVlabs/Sana/tree/sol-engine)

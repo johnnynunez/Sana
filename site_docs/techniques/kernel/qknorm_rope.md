@@ -17,3 +17,9 @@ This is part of the DiT attention-path fusion design space and is especially rel
 ## Validation
 
 Confirm compatibility with the selected attention backend and with any quantization path applied to QKV projections.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [RoFormer / rotary position embedding](https://arxiv.org/abs/2104.09864)
+- [Sol-Engine code](https://github.com/NVlabs/Sana/tree/sol-engine)

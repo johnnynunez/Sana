@@ -15,3 +15,9 @@ SVDQuant is part of the quantization design space described by the paper. It is 
 ## Trade-off
 
 SVDQuant can preserve quality better than naive 4-bit quantization, but it adds method-specific checkpoint and runtime requirements.
+
+## References
+
+- [Sol-Engine paper](http://arxiv.org/abs/2606.23743)
+- [Nunchaku](https://github.com/nunchaku-ai/nunchaku)
+- [DeepCompressor](https://github.com/nunchaku-ai/deepcompressor)
