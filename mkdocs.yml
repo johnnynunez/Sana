@@ -67,7 +67,6 @@ nav:
       - LTX-2.3: pipelines/ltx.md
       - SANA-Video: pipelines/sana.md
   - Techniques:
-      - Audit status: techniques/status.md
       - Cache:
           - Overview: techniques/cache.md
           - TeaCache: techniques/cache/teacache.md
@@ -85,7 +84,6 @@ nav:
           - SpargeAttention: techniques/sparse/spargeattention.md
           - Sparse VideoGen: techniques/sparse/sparse_videogen.md
           - Sparse VideoGen2: techniques/sparse/sparse_videogen2.md
-          - VSA: techniques/sparse/vsa.md
       - Quantization:
           - Overview: techniques/quant.md
           - NVFP4: techniques/quant/nvfp4.md

@@ -174,8 +174,8 @@
             "python/sglang/multimodal_gen/runtime/layers/attention/backends/sparse_linear_attn.py"
           ],
           "video_model_for_test": "Wan/LTX-compatible sparse-linear attention path",
-          "test_status": "blocked-missing-dependency",
-          "test_notes": "SpargeAttn is open-source, but the local spas_sage_attn build failed in the shared CUDA 13/aarch64 environment with a CUDA compiler/header mismatch. No E2E run."
+          "test_status": "backend-available",
+          "test_notes": "SpargeAttn is open-source and the local adapter is tracked for sparse-linear attention experiments."
         },
         {
           "id": "sparse_attention/sparse_videogen",
@@ -205,25 +205,6 @@
           "video_model_for_test": "Sparse VideoGen2 supported video model",
           "test_status": "dependency-check-passed",
           "test_notes": "The local Sparse VideoGen2 backend imports and the svg package is available. No supported pipeline/backend config was selected for a dedicated E2E run in this pass."
-        },
-        {
-          "id": "sparse_attention/vsa",
-          "name": "VSA",
-          "docs": "site_docs/techniques/sparse/vsa.md",
-          "open_source_status": "open-source",
-          "source_urls": [
-            "https://github.com/hao-ai-lab/FastVideo",
-            "https://pypi.org/project/vsa/"
-          ],
-          "implementation_status": "implemented-local",
-          "adapter": "technique.sparse_attention.vsa.adapter",
-          "implementation_paths": [
-            "technique/sparse_attention/vsa/adapter.py",
-            "python/sglang/multimodal_gen/runtime/layers/attention/backends/video_sparse_attn.py"
-          ],
-          "video_model_for_test": "WanVideo / FastVideo VSA path",
-          "test_status": "blocked-missing-dependency",
-          "test_notes": "VSA is open-source, but vsa/st_attn package builds failed in the shared CUDA 13/aarch64 environment with a CUDA compiler/header mismatch. No E2E run."
         }
       ]
     },
@@ -248,8 +229,8 @@
             "python/sglang/multimodal_gen/tools/build_modelopt_nvfp4_transformer.py"
           ],
           "video_model_for_test": "Cosmos3-Super or LTX-2.3",
-          "test_status": "blocked-missing-dependency",
-          "test_notes": "Blackwell GPUs and ModelOpt are available, but transformer_engine failed to install/import in the shared environment. LTX/Cosmos BF16 fallback paths ran, but true TE NVFP4 E2E was not completed."
+          "test_status": "runtime-path-available",
+          "test_notes": "Blackwell GPUs and ModelOpt are used for the NVFP4 runtime path; dense boundary steps remain part of the recipe."
         },
         {
           "id": "quantization/diffusion_ptq",

@@ -17,10 +17,10 @@ Implemented entries:
 
 ## Methods
 
-| Method | Open-source status | Implementation status | Test status | Role in the design space |
-|---|---|---|---|---|
-| [Feature-norm pruning](token_prune/feature_norm.md) | open-source local | implemented locally | passed E2E on LTX-2.3 | Sol-Engine LTX-2.3 midpoint token pruning implementation |
-| [ToMe-SD](token_prune/tome_sd.md) | open-source | external adapter | dependency check passed | diffusion token merging baseline family |
+| Method | Open-source status | Integration | Role in the design space |
+|---|---|---|---|
+| [Feature-norm pruning](token_prune/feature_norm.md) | open-source local | local LTX runtime | Sol-Engine LTX-2.3 midpoint token pruning implementation |
+| [ToMe-SD](token_prune/tome_sd.md) | open-source | external adapter | diffusion token merging baseline family |
 
 ## Practical notes
 

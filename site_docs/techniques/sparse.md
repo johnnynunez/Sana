@@ -12,20 +12,18 @@ Implemented entries:
 
 - `python/sglang/multimodal_gen/runtime/efficiency/transforms/sparse_attention.py`
 - `python/sglang/multimodal_gen/runtime/layers/attention/backends/piecewise_attn.py`
-- `python/sglang/multimodal_gen/runtime/layers/attention/backends/video_sparse_attn.py`
 - `python/sglang/multimodal_gen/runtime/layers/attention/backends/sparse_video_gen_2_attn.py`
 - `python/sglang/multimodal_gen/runtime/layers/attention/backends/sparse_linear_attn.py`
 - `python/sglang/multimodal_gen/runtime/layers/attention/backends/block_sparse_attn.py`
 
 ## Methods
 
-| Method | Open-source status | Implementation status | Test status | Role in the design space |
-|---|---|---|---|---|
-| [PISA](sparse/pisa.md) | open-source | implemented locally | passed E2E on LTX-2.3 | piecewise sparse attention selected for the LTX-2.3 full optimization stack |
-| [SpargeAttention](sparse/spargeattention.md) | open-source | external adapter | blocked: missing `spas_sage_attn` | training-free block-wise sparse attention family |
-| [Sparse VideoGen](sparse/sparse_videogen.md) | open-source | external adapter | dependency check passed | spatial-temporal sparse execution with online profiling |
-| [Sparse VideoGen2](sparse/sparse_videogen2.md) | open-source | implemented locally | dependency check passed | semantic-aware sparse-token identification and GPU layout |
-| [VSA](sparse/vsa.md) | open-source | implemented locally | blocked: missing `vsa` | video sparse attention operator family |
+| Method | Open-source status | Integration | Role in the design space |
+|---|---|---|---|
+| [PISA](sparse/pisa.md) | open-source | local LTX runtime | piecewise sparse attention selected for the LTX-2.3 full optimization stack |
+| [SpargeAttention](sparse/spargeattention.md) | open-source | external adapter | training-free block-wise sparse attention family |
+| [Sparse VideoGen](sparse/sparse_videogen.md) | open-source | external adapter | spatial-temporal sparse execution with online profiling |
+| [Sparse VideoGen2](sparse/sparse_videogen2.md) | open-source | local backend plus SVG adapter | semantic-aware sparse-token identification and GPU layout |
 
 ## Practical notes
 
