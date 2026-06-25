@@ -1,0 +1,327 @@
+{
+  "shared_environment": {
+    "name": "ltx23",
+    "prefix": ".conda/ltx23",
+    "setup_guide": "AGENTS.md",
+    "storage_script": "scripts/use_code_storage_env.sh",
+    "status": "created-and-verified",
+    "notes": "All implementation and test commands ran from the shared .conda/ltx23 environment after sourcing scripts/use_code_storage_env.sh. GPU tests used Slurm 4-GPU allocations because login nodes expose an older CUDA driver."
+  },
+  "categories": [
+    {
+      "id": "cache",
+      "name": "Cache",
+      "methods": [
+        {
+          "id": "cache/teacache",
+          "name": "TeaCache",
+          "docs": "site_docs/techniques/cache/teacache.md",
+          "open_source_status": "open-source",
+          "source_urls": ["https://github.com/ali-vilab/TeaCache"],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.cache.teacache.adapter",
+          "implementation_paths": [
+            "technique/cache/teacache/adapter.py",
+            "python/sglang/multimodal_gen/runtime/efficiency/techniques/teacache.py",
+            "python/sglang/multimodal_gen/runtime/cache/teacache.py"
+          ],
+          "video_model_for_test": "Cosmos3-Super",
+          "test_status": "passed-e2e",
+          "test_notes": "Cosmos3-Super 64B sanity test passed on 4 GPUs at 480x832, 9 frames, 4 steps. TeaCache variant teacache_c115_s1_m3 produced out.mp4 and perf.json, with hits at steps 1 and 2."
+        },
+        {
+          "id": "cache/easycache",
+          "name": "EasyCache",
+          "docs": "site_docs/techniques/cache/easycache.md",
+          "open_source_status": "open-source",
+          "source_urls": ["https://github.com/H-EmbodVis/EasyCache"],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.cache.easycache.adapter",
+          "implementation_paths": [
+            "technique/cache/easycache/adapter.py",
+            "python/sglang/multimodal_gen/runtime/models/dits/sana_video.py",
+            "scripts/sana/sana_video_sglang_run.py"
+          ],
+          "video_model_for_test": "SANA-Video",
+          "test_status": "passed-e2e",
+          "test_notes": "SANA-Video 2B weights downloaded to the shared HF cache. Baseline and fullopt sanity runs passed at 480x832, 9 frames, 4 steps; fullopt used --easycache 0.1 --ec-warmup 1 --linattn-bf16 --qkv-merge --compile."
+        },
+        {
+          "id": "cache/taylorseer",
+          "name": "TaylorSeer",
+          "docs": "site_docs/techniques/cache/taylorseer.md",
+          "open_source_status": "open-source",
+          "source_urls": [
+            "https://github.com/Shenyi-Z/TaylorSeer",
+            "https://github.com/vipshop/cache-dit"
+          ],
+          "implementation_status": "external-adapter",
+          "adapter": "technique.cache.taylorseer.adapter",
+          "implementation_paths": [
+            "technique/cache/taylorseer/adapter.py",
+            "python/sglang/multimodal_gen/runtime/cache/cache_dit_integration.py"
+          ],
+          "video_model_for_test": "Cache-DiT supported DiT video model",
+          "test_status": "dependency-check-passed",
+          "test_notes": "cache-dit is installed and the Sol-Engine cache-dit integration imports. No dedicated TaylorSeer video-pipeline E2E was selected in this pass."
+        },
+        {
+          "id": "cache/fixed_step_cache",
+          "name": "Fixed-step cache",
+          "docs": "site_docs/techniques/cache/fixed_step.md",
+          "open_source_status": "open-source-local",
+          "source_urls": ["https://github.com/NVlabs/Sana/tree/sol-engine"],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.cache.fixed_step_cache.adapter",
+          "implementation_paths": [
+            "technique/cache/fixed_step_cache/adapter.py",
+            "python/sglang/multimodal_gen/runtime/efficiency/techniques/step_cache.py",
+            "python/sglang/multimodal_gen/runtime/cache/ltx2_stage1_cache_core.py"
+          ],
+          "video_model_for_test": "LTX-2.3",
+          "test_status": "passed-e2e",
+          "test_notes": "LTX-2.3 baseline and fullopt passed end-to-end with reused local weights. The fullopt run generated out.mp4 and perf.json under outputs/technique_audit_ltx23/fullopt."
+        },
+        {
+          "id": "cache/cache_dit_dbcache",
+          "name": "Cache-DiT / DBCache",
+          "docs": "site_docs/techniques/cache/cache_dit.md",
+          "open_source_status": "open-source",
+          "source_urls": ["https://github.com/vipshop/cache-dit"],
+          "implementation_status": "external-adapter",
+          "adapter": "technique.cache.cache_dit_dbcache.adapter",
+          "implementation_paths": [
+            "technique/cache/cache_dit_dbcache/adapter.py",
+            "python/sglang/multimodal_gen/runtime/cache/cache_dit_integration.py",
+            "python/sglang/multimodal_gen/runtime/cache/ltx2_block_adapter.py"
+          ],
+          "video_model_for_test": "Cache-DiT supported DiT video model",
+          "test_status": "dependency-check-passed",
+          "test_notes": "cache-dit is installed and the local Cache-DiT/DBCache integration imports. No dedicated DBCache video-pipeline E2E was selected in this pass."
+        }
+      ]
+    },
+    {
+      "id": "token_pruning",
+      "name": "Token Pruning",
+      "methods": [
+        {
+          "id": "token_pruning/feature_norm_pruning",
+          "name": "Feature-norm pruning",
+          "docs": "site_docs/techniques/token_prune/feature_norm.md",
+          "open_source_status": "open-source-local",
+          "source_urls": ["https://github.com/NVlabs/Sana/tree/sol-engine"],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.token_pruning.feature_norm_pruning.adapter",
+          "implementation_paths": [
+            "technique/token_pruning/feature_norm_pruning/adapter.py",
+            "python/sglang/multimodal_gen/runtime/efficiency/techniques/token_prune.py",
+            "python/sglang/multimodal_gen/runtime/pipelines_core/stages/ltx_2_denoising.py"
+          ],
+          "video_model_for_test": "LTX-2.3",
+          "test_status": "passed-e2e",
+          "test_notes": "Covered by the LTX-2.3 fullopt sanity run. The run command enabled the full LTX optimization stack, including stage cache, PISA, token pruning, fusion, and the NVFP4-requested path."
+        },
+        {
+          "id": "token_pruning/tome_sd",
+          "name": "ToMe-SD",
+          "docs": "site_docs/techniques/token_prune/tome_sd.md",
+          "open_source_status": "open-source",
+          "source_urls": [
+            "https://github.com/dbolya/tomesd",
+            "https://huggingface.co/docs/diffusers/en/optimization/tome"
+          ],
+          "implementation_status": "external-adapter",
+          "adapter": "technique.token_pruning.tome_sd.adapter",
+          "implementation_paths": ["technique/token_pruning/tome_sd/adapter.py"],
+          "video_model_for_test": "Diffusers Stable Diffusion reference path; video-model integration not yet selected",
+          "test_status": "dependency-check-passed",
+          "test_notes": "tomesd is installed and imports. No Sol-Engine video-pipeline E2E was selected because ToMe-SD is tracked as an external diffusion token-merging baseline rather than a wired video path here."
+        }
+      ]
+    },
+    {
+      "id": "sparse_attention",
+      "name": "Sparse Attention",
+      "methods": [
+        {
+          "id": "sparse_attention/pisa",
+          "name": "PISA",
+          "docs": "site_docs/techniques/sparse/pisa.md",
+          "open_source_status": "open-source",
+          "source_urls": ["https://github.com/xie-lab-ml/piecewise-sparse-attention"],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.sparse_attention.pisa.adapter",
+          "implementation_paths": [
+            "technique/sparse_attention/pisa/adapter.py",
+            "python/sglang/multimodal_gen/runtime/efficiency/transforms/sparse_attention.py",
+            "python/sglang/multimodal_gen/runtime/layers/attention/backends/piecewise_attn.py"
+          ],
+          "video_model_for_test": "LTX-2.3",
+          "test_status": "passed-e2e",
+          "test_notes": "Covered by the LTX-2.3 fullopt sanity run. The run command set transformer_2=piecewise_attn with piecewise_sparsity=0.9 and produced out.mp4/perf.json."
+        },
+        {
+          "id": "sparse_attention/spargeattention",
+          "name": "SpargeAttention",
+          "docs": "site_docs/techniques/sparse/spargeattention.md",
+          "open_source_status": "open-source",
+          "source_urls": ["https://github.com/thu-ml/SpargeAttn"],
+          "implementation_status": "external-adapter",
+          "adapter": "technique.sparse_attention.spargeattention.adapter",
+          "implementation_paths": [
+            "technique/sparse_attention/spargeattention/adapter.py",
+            "python/sglang/multimodal_gen/runtime/layers/attention/backends/sparse_linear_attn.py"
+          ],
+          "video_model_for_test": "Wan/LTX-compatible sparse-linear attention path",
+          "test_status": "blocked-missing-dependency",
+          "test_notes": "SpargeAttn is open-source, but the local spas_sage_attn build failed in the shared CUDA 13/aarch64 environment with a CUDA compiler/header mismatch. No E2E run."
+        },
+        {
+          "id": "sparse_attention/sparse_videogen",
+          "name": "Sparse VideoGen",
+          "docs": "site_docs/techniques/sparse/sparse_videogen.md",
+          "open_source_status": "open-source",
+          "source_urls": ["https://github.com/svg-project/Sparse-VideoGen"],
+          "implementation_status": "external-adapter",
+          "adapter": "technique.sparse_attention.sparse_videogen.adapter",
+          "implementation_paths": ["technique/sparse_attention/sparse_videogen/adapter.py"],
+          "video_model_for_test": "Sparse-VideoGen supported video model",
+          "test_status": "dependency-check-passed",
+          "test_notes": "sparse-videogen installed from the public repository and imports as svg. Sol-Engine SVG1 runtime wiring is not complete, so no dedicated video E2E was run."
+        },
+        {
+          "id": "sparse_attention/sparse_videogen2",
+          "name": "Sparse VideoGen2",
+          "docs": "site_docs/techniques/sparse/sparse_videogen2.md",
+          "open_source_status": "open-source",
+          "source_urls": ["https://github.com/svg-project/Sparse-VideoGen"],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.sparse_attention.sparse_videogen2.adapter",
+          "implementation_paths": [
+            "technique/sparse_attention/sparse_videogen2/adapter.py",
+            "python/sglang/multimodal_gen/runtime/layers/attention/backends/sparse_video_gen_2_attn.py"
+          ],
+          "video_model_for_test": "Sparse VideoGen2 supported video model",
+          "test_status": "dependency-check-passed",
+          "test_notes": "The local Sparse VideoGen2 backend imports and the svg package is available. No supported pipeline/backend config was selected for a dedicated E2E run in this pass."
+        },
+        {
+          "id": "sparse_attention/vsa",
+          "name": "VSA",
+          "docs": "site_docs/techniques/sparse/vsa.md",
+          "open_source_status": "open-source",
+          "source_urls": [
+            "https://github.com/hao-ai-lab/FastVideo",
+            "https://pypi.org/project/vsa/"
+          ],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.sparse_attention.vsa.adapter",
+          "implementation_paths": [
+            "technique/sparse_attention/vsa/adapter.py",
+            "python/sglang/multimodal_gen/runtime/layers/attention/backends/video_sparse_attn.py"
+          ],
+          "video_model_for_test": "WanVideo / FastVideo VSA path",
+          "test_status": "blocked-missing-dependency",
+          "test_notes": "VSA is open-source, but vsa/st_attn package builds failed in the shared CUDA 13/aarch64 environment with a CUDA compiler/header mismatch. No E2E run."
+        }
+      ]
+    },
+    {
+      "id": "quantization",
+      "name": "Quantization",
+      "methods": [
+        {
+          "id": "quantization/nvfp4",
+          "name": "NVFP4",
+          "docs": "site_docs/techniques/quant/nvfp4.md",
+          "open_source_status": "open-source",
+          "source_urls": [
+            "https://github.com/NVIDIA/TransformerEngine",
+            "https://github.com/NVIDIA/Model-Optimizer"
+          ],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.quantization.nvfp4.adapter",
+          "implementation_paths": [
+            "technique/quantization/nvfp4/adapter.py",
+            "python/sglang/multimodal_gen/runtime/layers/quantization/modelopt_quant.py",
+            "python/sglang/multimodal_gen/tools/build_modelopt_nvfp4_transformer.py"
+          ],
+          "video_model_for_test": "Cosmos3-Super or LTX-2.3",
+          "test_status": "blocked-missing-dependency",
+          "test_notes": "Blackwell GPUs and ModelOpt are available, but transformer_engine failed to install/import in the shared environment. LTX/Cosmos BF16 fallback paths ran, but true TE NVFP4 E2E was not completed."
+        },
+        {
+          "id": "quantization/diffusion_ptq",
+          "name": "Diffusion PTQ",
+          "docs": "site_docs/techniques/quant/diffusion_ptq.md",
+          "open_source_status": "open-source-family",
+          "source_urls": [
+            "https://github.com/Xiuyu-Li/q-diffusion",
+            "https://github.com/42Shawn/PTQ4DM"
+          ],
+          "implementation_status": "reference-adapter",
+          "adapter": "technique.quantization.diffusion_ptq.adapter",
+          "implementation_paths": ["technique/quantization/diffusion_ptq/adapter.py"],
+          "video_model_for_test": "not selected",
+          "test_status": "dependency-check-passed",
+          "test_notes": "Representative open-source PTQ methods are tracked and the local quantization package imports. No unified Sol-Engine runtime path or calibrated video checkpoint was selected for E2E."
+        },
+        {
+          "id": "quantization/svdquant_nunchaku",
+          "name": "SVDQuant / Nunchaku",
+          "docs": "site_docs/techniques/quant/svdquant.md",
+          "open_source_status": "open-source",
+          "source_urls": [
+            "https://github.com/nunchaku-ai/nunchaku",
+            "https://github.com/nunchaku-ai/deepcompressor"
+          ],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.quantization.svdquant_nunchaku.adapter",
+          "implementation_paths": [
+            "technique/quantization/svdquant_nunchaku/adapter.py",
+            "python/sglang/multimodal_gen/runtime/layers/quantization/nunchaku_linear.py",
+            "python/sglang/multimodal_gen/runtime/layers/quantization/configs/nunchaku_config.py"
+          ],
+          "video_model_for_test": "Flux/Qwen/ZImage Nunchaku-compatible path",
+          "test_status": "dependency-check-passed",
+          "test_notes": "nunchaku and the local Nunchaku linear path import. No compatible quantized video checkpoint was available for an E2E run."
+        },
+        {
+          "id": "quantization/sageattention",
+          "name": "SageAttention",
+          "docs": "site_docs/techniques/quant/sageattention.md",
+          "open_source_status": "open-source",
+          "source_urls": ["https://github.com/thu-ml/SageAttention"],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.quantization.sageattention.adapter",
+          "implementation_paths": [
+            "technique/quantization/sageattention/adapter.py",
+            "python/sglang/multimodal_gen/runtime/layers/attention/backends/sage_attn.py",
+            "python/sglang/multimodal_gen/runtime/layers/attention/backends/sage_attn3.py"
+          ],
+          "video_model_for_test": "SageAttention-compatible attention backend path",
+          "test_status": "dependency-check-passed",
+          "test_notes": "sageattention and the local SageAttention backend import. No compatible video backend configuration was selected for an E2E run."
+        },
+        {
+          "id": "quantization/modelopt_fp8",
+          "name": "ModelOpt / FP8",
+          "docs": "site_docs/techniques/quant/modelopt_fp8.md",
+          "open_source_status": "open-source",
+          "source_urls": ["https://github.com/NVIDIA/Model-Optimizer"],
+          "implementation_status": "implemented-local",
+          "adapter": "technique.quantization.modelopt_fp8.adapter",
+          "implementation_paths": [
+            "technique/quantization/modelopt_fp8/adapter.py",
+            "python/sglang/multimodal_gen/runtime/layers/quantization/modelopt_quant.py",
+            "python/sglang/multimodal_gen/tools/build_modelopt_fp8_transformer.py"
+          ],
+          "video_model_for_test": "ModelOpt FP8-exported diffusion transformer",
+          "test_status": "dependency-check-passed",
+          "test_notes": "modelopt and the local ModelOpt FP8 path import. No ModelOpt-exported FP8 video checkpoint was available for an E2E run."
+        }
+      ]
+    }
+  ]
+}

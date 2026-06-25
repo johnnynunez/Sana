@@ -15,7 +15,7 @@ set -euo pipefail
 
 PY="${PYTHON_BIN:-python}"
 NVCC_VER="${NVCC_VER:-13.2.78}"          # nvcc/crt/nvvm — JIT "nvcc: not found"
-CCCL_VER="${CCCL_VER:-}"                  # cuda-cccl (nv/target headers); empty = latest cu13
+CCCL_VER="${CCCL_VER:-13.2.75}"           # cuda-cccl headers must match the nvcc minor series
 CUBLAS_VER="${CUBLAS_VER:-13.2.2.2}"      # TE needs cublasLtGroupedMatrixLayoutInit_internal
 WITH_TE=0
 [[ "${1:-}" == "--with-te" ]] && WITH_TE=1

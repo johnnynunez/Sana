@@ -20,7 +20,7 @@ Video diffusion inference exposes redundancy at three complementary levels: **Al
 | [Quantization](techniques/quant.md) | NVFP4 |
 | [Kernel fusion](techniques/kernel.md) | AdaLN gate fusion, GEMM epilogues, QKV merge, ... |
 | [Sparse attention](techniques/sparse.md) | PISA, SpargeAttention, Sparse VideoGen, ... |
-| [Token pruning](techniques/token_prune.md) | Feature-norm pruning, ToMe-SD, Astraea, ... |
+| [Token pruning](techniques/token_prune.md) | Feature-norm pruning, ToMe-SD |
 
 ## Quick start
 

@@ -67,6 +67,7 @@ nav:
       - LTX-2.3: pipelines/ltx.md
       - SANA-Video: pipelines/sana.md
   - Techniques:
+      - Audit status: techniques/status.md
       - Cache:
           - Overview: techniques/cache.md
           - TeaCache: techniques/cache/teacache.md
@@ -74,6 +75,17 @@ nav:
           - TaylorSeer: techniques/cache/taylorseer.md
           - Fixed-step cache: techniques/cache/fixed_step.md
           - Cache-DiT / DBCache: techniques/cache/cache_dit.md
+      - Token pruning:
+          - Overview: techniques/token_prune.md
+          - Feature-norm pruning: techniques/token_prune/feature_norm.md
+          - ToMe-SD: techniques/token_prune/tome_sd.md
+      - Sparse attention:
+          - Overview: techniques/sparse.md
+          - PISA: techniques/sparse/pisa.md
+          - SpargeAttention: techniques/sparse/spargeattention.md
+          - Sparse VideoGen: techniques/sparse/sparse_videogen.md
+          - Sparse VideoGen2: techniques/sparse/sparse_videogen2.md
+          - VSA: techniques/sparse/vsa.md
       - Quantization:
           - Overview: techniques/quant.md
           - NVFP4: techniques/quant/nvfp4.md
@@ -90,20 +102,6 @@ nav:
           - Residual and modulation glue fusion: techniques/kernel/residual_modulation.md
           - QKV merge: techniques/kernel/qkv_merge.md
           - torch.compile: techniques/kernel/torch_compile.md
-      - Sparse attention:
-          - Overview: techniques/sparse.md
-          - PISA: techniques/sparse/pisa.md
-          - SpargeAttention: techniques/sparse/spargeattention.md
-          - Sparse VideoGen: techniques/sparse/sparse_videogen.md
-          - Sparse VideoGen2: techniques/sparse/sparse_videogen2.md
-          - VSA: techniques/sparse/vsa.md
-      - Token pruning:
-          - Overview: techniques/token_prune.md
-          - Feature-norm pruning: techniques/token_prune/feature_norm.md
-          - ToMe-SD: techniques/token_prune/tome_sd.md
-          - Astraea: techniques/token_prune/astraea.md
-          - TAPE: techniques/token_prune/tape.md
-          - CoReDiT: techniques/token_prune/coredit.md
 
 extra:
   social:

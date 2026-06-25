@@ -17,13 +17,10 @@ Implemented entries:
 
 ## Methods
 
-| Method | Role in the design space |
-|---|---|
-| [Feature-norm pruning](token_prune/feature_norm.md) | Sol-Engine LTX-2.3 midpoint token pruning implementation |
-| [ToMe-SD](token_prune/tome_sd.md) | diffusion token merging baseline family |
-| [Astraea](token_prune/astraea.md) | token-budget search for video DiTs |
-| [TAPE](token_prune/tape.md) | temporally smoothed token importance for video diffusion |
-| [CoReDiT](token_prune/coredit.md) | spatially coherent pruning with reconstruction |
+| Method | Open-source status | Implementation status | Test status | Role in the design space |
+|---|---|---|---|---|
+| [Feature-norm pruning](token_prune/feature_norm.md) | open-source local | implemented locally | passed E2E on LTX-2.3 | Sol-Engine LTX-2.3 midpoint token pruning implementation |
+| [ToMe-SD](token_prune/tome_sd.md) | open-source | external adapter | dependency check passed | diffusion token merging baseline family |
 
 ## Practical notes
 

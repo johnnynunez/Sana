@@ -14,13 +14,13 @@ The paper frames cache as a cross-step family: the cache agent searches the poli
 
 ## Methods
 
-| Method | Role in the design space |
-|---|---|
-| [TeaCache](cache/teacache.md) | timestep-conditioned residual replay, selected for Cosmos3-Super |
-| [EasyCache](cache/easycache.md) | runtime-adaptive feature reuse, selected for SANA-Video |
-| [TaylorSeer](cache/taylorseer.md) | feature forecasting with Taylor-series extrapolation |
-| [Fixed-step cache](cache/fixed_step.md) | deterministic fixed-step schedule, selected for LTX-2.3 |
-| [Cache-DiT / DBCache](cache/cache_dit.md) | block-level diffusion cache family used as a related cache baseline |
+| Method | Open-source status | Implementation status | Test status | Role in the design space |
+|---|---|---|---|---|
+| [TeaCache](cache/teacache.md) | open-source | implemented locally | passed E2E on Cosmos3-Super | timestep-conditioned residual replay, selected for Cosmos3-Super |
+| [EasyCache](cache/easycache.md) | open-source | implemented locally | passed E2E on SANA-Video | runtime-adaptive feature reuse, selected for SANA-Video |
+| [TaylorSeer](cache/taylorseer.md) | open-source | external adapter via cache-dit | dependency check passed | feature forecasting with Taylor-series extrapolation |
+| [Fixed-step cache](cache/fixed_step.md) | open-source local | implemented locally | passed E2E on LTX-2.3 | deterministic fixed-step schedule, selected for LTX-2.3 |
+| [Cache-DiT / DBCache](cache/cache_dit.md) | open-source | external adapter via cache-dit | dependency check passed | block-level diffusion cache family used as a related cache baseline |
 
 ## Practical notes
 

@@ -15,13 +15,13 @@ NVFP4 requires Blackwell GPUs and TransformerEngine. On older GPUs, the code fal
 
 ## Methods
 
-| Method | Role in the design space |
-|---|---|
-| [NVFP4](quant/nvfp4.md) | production low-precision path used by Cosmos3-Super and LTX-2.3 |
-| [Diffusion PTQ](quant/diffusion_ptq.md) | PTQ4DiT / Q-DiT / ViDiT-Q style diffusion-aware calibration family |
-| [SVDQuant / Nunchaku](quant/svdquant.md) | outlier absorption with low-rank components for 4-bit diffusion inference |
-| [SageAttention](quant/sageattention.md) | attention-specific 8-bit to 4-bit acceleration family |
-| [ModelOpt / FP8](quant/modelopt_fp8.md) | practical transformer checkpoint and runtime quantization family in the codebase |
+| Method | Open-source status | Implementation status | Test status | Role in the design space |
+|---|---|---|---|---|
+| [NVFP4](quant/nvfp4.md) | open-source | implemented locally | blocked: missing `transformer_engine` | production low-precision path used by Cosmos3-Super and LTX-2.3 |
+| [Diffusion PTQ](quant/diffusion_ptq.md) | open-source family | reference adapter | dependency check passed | PTQ4DiT / Q-DiT / ViDiT-Q style diffusion-aware calibration family |
+| [SVDQuant / Nunchaku](quant/svdquant.md) | open-source | implemented locally | dependency check passed | outlier absorption with low-rank components for 4-bit diffusion inference |
+| [SageAttention](quant/sageattention.md) | open-source | implemented locally | dependency check passed | attention-specific 8-bit to 4-bit acceleration family |
+| [ModelOpt / FP8](quant/modelopt_fp8.md) | open-source | implemented locally | dependency check passed | practical transformer checkpoint and runtime quantization family in the codebase |
 
 ## Why boundary steps stay dense
 
