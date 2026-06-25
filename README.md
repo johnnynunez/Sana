@@ -51,8 +51,8 @@ support a wider range of models.
 | Model | Params | Acceleration line | Speedup |
 |---|---|---|---|
 | **[SANA-Video](https://huggingface.co/Efficient-Large-Model/SANA-Video_2B_480p_diffusers)** | 2B | EasyCache + fusion + compile | **~2.77×** |
-| **[Cosmos3-Super](https://huggingface.co/nvidia/Cosmos3-Super)** | 64B | TeaCache + step-selective NVFP4 | **~2.26×** |
-| **[LTX-2.3](https://huggingface.co/Lightricks/LTX-2.3)** | 22B | KWL fusion + cache + PISA + NVFP4 + token-prune | **~2.4×** |
+| **[Cosmos3-Super](https://huggingface.co/nvidia/Cosmos3-Super)** | 64B | TeaCache + step-selective NVFP4 | **~2.27×** |
+| **[LTX-2.3](https://huggingface.co/Lightricks/LTX-2.3)** | 22B | KWL fusion + cache + PISA + NVFP4 + token-prune | **~2.38×** |
 
 </div>
 
