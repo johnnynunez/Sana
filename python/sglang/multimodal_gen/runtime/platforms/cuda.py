@@ -193,7 +193,16 @@ class CudaPlatformBase(Platform):
     @lru_cache(maxsize=1)
     def get_modelopt_flashinfer_fp4_backend(cls) -> str:
         backend = envs.SGLANG_DIFFUSION_FLASHINFER_FP4_GEMM_BACKEND
-        default_backend = "trtllm" if cls.is_blackwell() else "auto"
+        if cls.is_blackwell():
+            default_backend = "trtllm"
+        elif cls.is_sm120():
+            # SM12.x (RTX PRO 6000 / RTX 50xx / DGX Spark GB10): FlashInfer's
+            # trtllm fp4 GEMM rejects capability 120; cudnn and cutlass are
+            # supported and measure within noise of each other on Cosmos3-Nano
+            # GEMM shapes, while "auto" mis-tunes some shapes. Prefer cudnn.
+            default_backend = "cudnn"
+        else:
+            default_backend = "auto"
         if backend is None:
             return default_backend
 
@@ -214,6 +223,13 @@ class CudaPlatformBase(Platform):
                 default_backend,
             )
             return default_backend
+        if backend == "trtllm" and cls.is_sm120():
+            logger.warning(
+                "FlashInfer fp4 GEMM backend 'trtllm' does not support SM12.x "
+                "(BackendSupportedError with capability 120). Falling back to "
+                "'cudnn'."
+            )
+            return "cudnn"
         return backend
 
     @classmethod
@@ -236,10 +252,16 @@ class CudaPlatformBase(Platform):
                     "FlashInfer.",
                     requested_backend,
                 )
-        prefer_flashinfer = requested_backend is not None or cls.is_blackwell()
+        prefer_flashinfer = (
+            requested_backend is not None or cls.is_blackwell() or cls.is_sm120()
+        )
 
         # Blackwell FP4 is fastest through FlashInfer's backend-specific kernels
-        # for the large diffusion GEMMs measured in LTX2 HQ inference.
+        # for the large diffusion GEMMs measured in LTX2 HQ inference. On SM12.x
+        # (RTX PRO 6000 Blackwell / RTX 50xx / DGX Spark GB10) FlashInfer's
+        # cudnn/cutlass fp4 paths are the only supported ones (sgl_kernel wheels
+        # do not ship SM12.x FP4 GEMM), measuring 2.5-3.3x over BF16 on
+        # Cosmos3-Nano GEMM shapes (M=37440, K=4096..12288).
         if prefer_flashinfer:
             try:
                 from flashinfer import mm_fp4 as flashinfer_mm_fp4

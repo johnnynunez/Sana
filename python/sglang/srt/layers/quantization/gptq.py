@@ -64,7 +64,12 @@ if TYPE_CHECKING:
 _is_cuda = is_cuda()
 
 if _is_cuda:
-    from sgl_kernel import gptq_gemm, gptq_shuffle
+    try:
+        from sgl_kernel import gptq_gemm, gptq_shuffle
+    except ImportError:
+        # sgl_kernel unavailable/ABI-incompatible (e.g. SM12.x GPUs); the
+        # diffusion runtime does not use these LLM kernels.
+        gptq_gemm = gptq_shuffle = None
 
     from sglang.jit_kernel.gptq_marlin_repack import gptq_marlin_repack
 
